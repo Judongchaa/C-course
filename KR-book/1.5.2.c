@@ -7,5 +7,5 @@ int main(void) {
     while (getchar() != "\n") {
         nc++;
     } 
-    printf("%f\n", nc);
+	    printf("%f\n", nc);
 }
