@@ -5,7 +5,7 @@ int main() {
     int prev_space = 0;
 	int c;
 
-	char phrase[10] = {0};
+	char phrase[100] = {0};
 
 	while ((c = getchar()) != 10) {
 		if (c != 32) {
