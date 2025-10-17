@@ -2,7 +2,17 @@
 
 #define IN 1
 #define OUT 0
-
+/* returns the maximum value in an array */
+int max_in_array(int *nwords, int array_lenght) {
+	int temp = 0;
+	for (int i = 0; i<array_lenght; i++) {
+		if (nwords[i] > temp) {
+			temp = nwords[i];
+		}
+	}
+	
+	return temp;
+}
 /* count digits, white space, others */
 int main() {
 	int c, i, char_per_word;
@@ -26,16 +36,25 @@ int main() {
 			}			
 		} else {
 			state = IN;
+
 			char_per_word++;
+			nwords[i] = char_per_word;
+
 		}
 		
-		printf("Histogram: \n");
-		for (int j = 0; j < i; j++) {
-			printf("%d:", j);
-			while (nwords[j]) {
-				printf("*");
+	printf("\nHistogram: \n");
+	
+	while(max_in_array(nwords, 10)) {
+		for (int j = 0; j <= i; j++) {
+			if (nwords[j] > 0) {
+				printf("* ");
 				nwords[j]--;
-			}
-			printf("\n");
+			
+			} else {
+				printf("  ");
+			}	
 		}
+		printf("\n");
+	}
 }
+
