@@ -1,5 +1,7 @@
 #include <stdio.h>
-#define MAXLINE 1000 /* maximum input line length */
+#define MAXLINE 100 /* maximum input line length */
+#define MINCHARACTERS 8
+#define MAXLINELIST 10
 
 int get_line(char line[], int maxline);
 void copy(char to[], char from[]);
@@ -7,23 +9,25 @@ void copy(char to[], char from[]);
 /* print the longest input line */
 int main() {
     int len;            /* current line length */
-    int max;            /* maximum length seen so far */
+    int position;       /* current number of line registered */
     char line[MAXLINE]; /* current input line */
-    char longest[MAXLINE]; /* longest line saved here */
+    char line_list[MAXLINELIST][MAXLINE]; /* list of lines saved here */
 
-    max = 0;
+    position = 0;
     while ((len = get_line(line, MAXLINE)) > 0)
-        if (len > max) {
-            max = len;
-            copy(longest, line);
+        if (len > MINCHARACTERS) {
+            copy(line_list[position], line);
+            position++;
         }
 
 /* there was a line, it stops to read from the array at the first \0
  * the %s format specification in printf expects the argument to be a string
  */
-    if (max > 0) 
-        printf("%s", longest);
-
+    printf("\nQueste sono le tue frasi con più di %d caratteri:", MINCHARACTERS);
+    while (position) {
+        position--;
+        printf("\n%s",line_list[position]);       
+    }
     return 0;
 }
 
@@ -35,8 +39,10 @@ int main() {
 int get_line(char s[], int lim) {
     int c, i;
 
-    for (i = 0; i < lim - 1 && (c = getchar()) != EOF && c != '\n'; ++i)
-        s[i] = c;
+    for (i = 0;(c = getchar()) != EOF && c != '\n'; ++i)
+        if (i < (lim - 1)) {
+            s[i] = c; 
+        }
 
     if (c == '\n') {
         s[i] = c;
@@ -48,9 +54,10 @@ int get_line(char s[], int lim) {
 }
 
 /* copy: copy 'from' into 'to'; assume to is big enough */
-void copy(char to[], char from[]) {
+void copy (char to[], char from[]) {
     int i = 0;
     while ((to[i] = from[i]) != '\0')
         ++i;
+
 }
 

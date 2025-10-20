@@ -1,5 +1,8 @@
 #include <stdio.h>
 
+/* function prototype:
+ * in the prototype parameters name are optional 
+ */
 int power(int m, int n);
 
 /* test power function */
