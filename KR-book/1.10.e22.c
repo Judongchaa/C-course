@@ -5,6 +5,7 @@
 
 void print_line(char string[], int len); 
 void move_string(char string[], int start, int len, int ammount);
+void print_n_index(char string[], int end, int start); 
 
 int main() {
     int c, len = 0;
@@ -30,27 +31,7 @@ void print_line(char string[], int len) {
     lines = nchar = 0;
     last_space = -1;
 
+    char foldedS[MAXLINE] = {'\0'};
+
     for(int i = 0; i<len; i++) {
-        
-        nchar++;
 
-        if (string[i] == ' ') {
-            last_space = i;    
-        }
-
-        if (nchar == NCOLUMN) {
-             if(lastspace != -1) {
-                string[last_space] = '\n';
-
-                lines++;
-                nchar = 0;
-                last_space = -1;
-             } else {
-                
-             
-             }
-        } 
-    }
-}
-
-void last_indexs(string[], n_indexs)
