@@ -26,34 +26,31 @@ int main() {
 
 void print_line(char string[], int len) {
     
-    int lines = 1;
-    int last_space;
-    
-    for(int i = 0; i <= len; i++) {
+    int lines, last_space, nchar;
+    lines = nchar = 0;
+    last_space = -1;
 
-        if(string[i] == ' ') {
-            last_space = i;
+    for(int i = 0; i<len; i++) {
+        
+        nchar++;
+
+        if (string[i] == ' ') {
+            last_space = i;    
         }
-        if(((i % NCOLUMN) == 0) && i>0) {
-            if(last_space > (lines * NCOLUMN)) {
+
+        if (nchar == NCOLUMN) {
+             if(lastspace != -1) {
                 string[last_space] = '\n';
+
                 lines++;
-            } else {
-                move_string(string, i, len, 3);
-                string[i] = '=';
-                string[i++] = '\n';
-//                string[i++] = '=';
-            } 
-        }
-    }
-
-    printf("%s\n", string);
-}
-
-void move_string(char string[], int start, int len, int ammount) {
-
-    while(len >= start) {
-        string[len+ammount] = string[len];
-        len--;
+                nchar = 0;
+                last_space = -1;
+             } else {
+                
+             
+             }
+        } 
     }
 }
+
+void last_indexs(string[], n_indexs)
