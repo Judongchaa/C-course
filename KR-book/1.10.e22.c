@@ -40,8 +40,8 @@ void print_line(char string[], int len) {
                 lines++;
             } else {
                 move_string(string, i, len, 3);
-//                string[i] = '=';
-//                string[i++] = '\n';
+                string[i] = '=';
+                string[i++] = '\n';
 //                string[i++] = '=';
             } 
         }
