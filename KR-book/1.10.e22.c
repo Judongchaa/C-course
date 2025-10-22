@@ -3,35 +3,37 @@
 #define NCOLUMN 10
 #define MAXLINE 1000
 
-void print_line(char string[], int len); 
-void move_string(char string[], int start, int len, int ammount);
-void print_n_index(char string[], int end, int start); 
-
 int main() {
-    int c, len = 0;
+    int c, len = 0, col = 0;
+    int last_space = -1;
 
-    char string[MAXLINE] = {'\0'};
+    char string[MAXLINE];
     
-    while((c = getchar()))  {
-        
-        if ((c == '\n') || (c == EOF)) {
-            break;
-        }
-        
+    while((c = getchar()) != EOF && c != '\n')  {
+    
         string[len] = c;
+
+        if (c == ' ') {
+            last_space = len;
+        }
+
+        if (col != NCOLUMN-1) {
+            col++;
+        } else if (last_space > 0) {
+            string[last_space] = '\n';
+            
+            col = 0;
+            last_space = -1;
+        } else {
+            len++;
+            string[len] = '-';
+            len++;
+            string[len] = '\n';
+            col = 0;
+        }
         len++;
     }
-
-    print_line(string, len);
+    string[len] = '\0';
+    printf("\n%s", string);
 }
-
-void print_line(char string[], int len) {
-    
-    int lines, last_space, nchar;
-    lines = nchar = 0;
-    last_space = -1;
-
-    char foldedS[MAXLINE] = {'\0'};
-
-    for(int i = 0; i<len; i++) {
 
