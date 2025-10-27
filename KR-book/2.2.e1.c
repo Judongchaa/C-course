@@ -1,30 +1,36 @@
 #include <stdio.h>
+#include <limits.h>
 
-#define STEP 100000
+#define STEP 10000
 #define PRECISION 0.01
+
+void int_limits(int num, int step);
 
 int main(void) {
     int intNum = 0;
-    unsigned int uIntNum = 0;
+    signed int sIntNum = 0;
 
-    float floatNum = 0;
-    unsigned float uFloatNum = 0;
+    printf("%d\n", INT_MAX);
 
-    uFloatLImit = float_limits(uFloatNum, STEP)
+    max_int = int_limits(intNum, STEP);
+    min_int = int_limits(sIntNUm, -STEP);
 }
 
-int float_limits(float num, float step) {
+void int_limits(int num, int step) {
 
-    while(step > PRECISION) {
-        
+    int oldNum = num;
+    while(step >= 1) {
+	if(num+step > oldNum) {
+		num += step;
+		oldNum = num;
+	} else {
+		step--;
+	}
+	        
     }
 
-}
-
-int int_limits(float num, float step) {
-
-    while(step > PRECISION) {
-        
-    }
+    printf("Maximum value of int: %d\n", num);
 
 }
+
+
