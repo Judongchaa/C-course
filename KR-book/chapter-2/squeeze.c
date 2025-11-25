@@ -23,3 +23,4 @@ void squeeze(char t[], char s[]) {
     printf("%s", output);
 
 }
+
