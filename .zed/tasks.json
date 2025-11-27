@@ -1,0 +1,9 @@
+[
+  {
+    "label": "Run Current C File",
+    "command": "gcc \"$ZED_FILE\" -o run.out && ./run.out",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false
+  }
+]

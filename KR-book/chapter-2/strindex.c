@@ -5,34 +5,38 @@ int strindex(char s[], char t[]);
 
 int main(void)
 {
-  char s[] = "Hello world or hello bassano\n";
-  char t[] = "or";
+  char s[] = "Hello world or hello orbassano\n";
+  char t[] = "o";
 
-  int pos = strindex(s, t); 
+  int pos = strindex(s, t);
   printf("%d\n", pos);
 
   return 0;
-} 
+}
 
 int strindex(char s[], char t[])
 {
   int rightmost = -1;
+  int matching = 0;
+
   int slen = strlen(s);
   int tlen = strlen(t);
 
-  for(int i = 0; i<slen; i++)
+  for(int i = 0, j = 0; i<slen; i++)
   {
-    if(s[i] == t[0]) {
-      int matching = 1;
-
-      for (int j = 1; j<tlen; j++) 
-      {
-        i++;
+    if (s[i] == t[j]) {
         matching++;
-        if (matching == tlen) rightmost = (i-tlen);
-      }
+        j++;
+    } else {
+        matching = 0;
+        j = 0;
     }
- 
+    if (matching == tlen)
+    {
+        rightmost = (i-tlen+1);
+        matching = 0;
+        j = 0;
+    }
   }
   return rightmost;
 }

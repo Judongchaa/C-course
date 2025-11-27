@@ -1,5 +1,0 @@
----
-triple:          'arm64-apple-darwin'
-binary-path:     '/Users/carlomazzara/Code/C-course/KR-book/chapter-2/betteritoa'
-relocations:     []
-...
