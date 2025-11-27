@@ -1,0 +1,22 @@
+[
+  {
+    "label": "Debug Current File",
+    "adapter": "GDB",
+    "request": "launch",
+    // We will always run this specific output file
+    "program": "${ZED_WORKTREE_ROOT}/debug.out",
+    "cwd": "${ZED_WORKTREE_ROOT}",
+    "build": {
+      "command": "gcc",
+      "args": [
+        "-g",
+        // This variable resolves to the absolute path of the currently open file
+        "${ZED_FILE}",
+        "-o",
+        // We force the output to always be 'debug.out' in the root
+        "debug.out"
+      ],
+      "cwd": "${ZED_WORKTREE_ROOT}"
+    }
+  }
+]
