@@ -20,7 +20,7 @@ void itoa(char n, char s[]) {
 
     sign = (n>=0) ? 1 : -1;
 
-    do { 
+    do {
         s[i++] = sign*(n % 10) + '0'; /* get next digit */
     } while (sign*(n /= 10) > 0); /* delete it */
 
@@ -32,7 +32,7 @@ void itoa(char n, char s[]) {
 }
 
 int main(void) {
-    char n = 0;
+    char n = 20;
     char s[20];
 
     itoa(n, s);
