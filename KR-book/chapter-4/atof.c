@@ -6,7 +6,7 @@ double atof(char s[]);
 
 int main(void)
 {
-    char s[] = "    -1234.35e3";
+    char s[] = "1234";
     double out = atof(s);
 
     printf("%f\n", out);
@@ -55,19 +55,19 @@ double atof(char s[])
         expvalue = expvalue*10 + (s[i]-'0');
     }
 
-    double nonscientific = out*sign/exp;
+    out = out*sign/exp;
     expvalue *= expsign;
 
     if (expvalue > 0) {
         for(int i = 0; i<expvalue; i++) {
-            nonscientific *= 10;
+            out *= 10;
         }
     } else {
         for(int i = 0; i>expvalue; i--) {
-            nonscientific /= 10;
+            out /= 10;
         }
     }
 
 
-    return nonscientific;
+    return out;
 }
