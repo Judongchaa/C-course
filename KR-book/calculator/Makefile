@@ -1,52 +1,51 @@
-# Compiler and flags
+# 1. Compiler and Flags
 CC = gcc
-CFLAGS = -Wall -Wextra -g -MMD -MP  # -MMD -MP for dependency generation
-LDFLAGS =
+CFLAGS = -Wall -Wextra -g -MMD -MP
+LDFLAGS = -lm
 
-# Directories
+# 2. Directories
 SRC_DIR = src
 INCLUDE_DIR = include
 BUILD_DIR = build
 BIN_DIR = bin
-TARGET = $(BIN_DIR)/calculator
 
-# Component subdirectories
-PART_DIRS = $(SRC_DIR)/Part1 $(SRC_DIR)/Part2 $(SRC_DIR)/Part3
+# 3. Output Executable
+# FIX: The target must include the filename (e.g., /calc), not just the folder.
+TARGET = $(BIN_DIR)/calc
 
-# Include paths
-INCLUDES = -I$(INCLUDE_DIR) \
-           -I$(SRC_DIR)
+# 4. Include paths
+INCLUDES = -I$(INCLUDE_DIR)
 
-# Find all .c files
+# 5. Find all .c files
 SOURCES := $(shell find $(SRC_DIR) -name '*.c')
 
-# Generate object file paths
+# 6. Generate object file paths
 OBJECTS := $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(SOURCES))
 
-# Auto-generated dependency files
+# 7. Auto-generated dependency files
 DEPS := $(OBJECTS:.o=.d)
 
-# Phony targets
+# 8. Phony targets
 .PHONY: all clean
 
 # Default target
 all: $(TARGET)
 
-# Build executable
+# 9. Link Rule: Build the executable
 $(TARGET): $(OBJECTS)
-    @mkdir -p $(BIN_DIR)
-    $(CC) $(OBJECTS) $(LDFLAGS) -o $(TARGET)
-    @echo "Built target: $@"
+	@mkdir -p $(BIN_DIR)
+	$(CC) $(OBJECTS) $(LDFLAGS) -o $@
+	@echo "Built executable: $@"
 
-# Compile .c to .o
+# 10. Compile Rule: .c to .o
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
-    @mkdir -p $(@D)
-    $(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@mkdir -p $(@D)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-# Clean artifacts
+# 11. Clean Rule
 clean:
-    @rm -rf $(BUILD_DIR) $(BIN_DIR)
-    @echo "Cleaned build and bin directories"
+	@rm -rf $(BUILD_DIR) $(BIN_DIR)
+	@echo "Cleaned build and bin directories"
 
-# Include dependencies
+# 12. Include dependencies
 -include $(DEPS)
