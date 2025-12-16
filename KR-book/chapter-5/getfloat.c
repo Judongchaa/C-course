@@ -3,22 +3,23 @@
 
 #define SIZE 20
 #define iprint(expr) printf(#expr " = %d\n", expr)
+#define fprint(expr) printf(#expr " = %f\n", expr)
 
-int getint(int *pn);
+int getfloat(float *pn);
 
 int main(void) {
     int n, i;
-    int array[SIZE] = {0};
+    float array[SIZE] = {0};
 
-    printf("Enter input (e.g., '123 45 -6'):\n");
+    printf("Enter input:\n");
 
     // The input loop
-    for (n = 0; n < SIZE && getint(&array[n]); n++)
+    for (n = 0; n < SIZE && getfloat(&array[n]); n++)
         ;
 
     printf("\nParsed Integers:\n");
     for (i = 0; i < n; i++) {
-        printf("%d ", array[i]);
+        printf("%f ", array[i]);
     }
     printf("\n");
 
@@ -27,7 +28,7 @@ int main(void) {
 
 
 /* getint: get next integer from input into *pn */
-int getint(int *pn) {
+int getfloat(float *pn) {
     int c, sign;
     while (isspace(c = getchar())) /* skip white space */
         ;
@@ -49,6 +50,16 @@ int getint(int *pn) {
 
     for (*pn = 0; isdigit(c); c = getchar())
         *pn = 10 * *pn + (c - '0');
+
+    if (c == '.') {
+        c = getchar();
+        float n;
+        for (n = 10; isdigit(c); c = getchar(), n *= 10) {
+            *pn = *pn + (c - '0')/n;
+        }
+        fprint(*pn);
+    }
+
 
     *pn *= sign;
     if (c != EOF)
