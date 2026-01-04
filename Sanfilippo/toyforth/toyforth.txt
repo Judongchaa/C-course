@@ -4,9 +4,9 @@ toyforth examples:
 3) 10 [10 20 <] if
 
 to-do:
-- sistema per decidere se prendere le struzioni da un file o dalla cli
 - sistema per leggere le istruzioni (getop)
 - sistema per eseguire i calcoli derivanti dalle istruzioni
 
 fatto:
 - scrivere la funzione objfree
+- sistema per decidere se prendere le struzioni da un file o dalla cli

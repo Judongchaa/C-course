@@ -81,14 +81,19 @@ void stack_print(tfstack *st) {
 
     printf(" [");
     for(int j = 0; j<len; j++, o=(st->stack[j])) {
-        if(o->type == TFOBJ_TYPE_NUM)
+        switch(o->type) {
+        case(TFOBJ_TYPE_NUM):
             printf (" %d", o->num);
-        else if (o->type == TFOBJ_TYPE_OP)
+            break;
+        case(TFOBJ_TYPE_OP):
             printf (" %c", o->op);
-        else if (o->type == TFOBJ_TYPE_STR)
+            break;
+        case(TFOBJ_TYPE_STR):
             printf (" %s", o->str.symbol);
-        else
+            break;
+        case(TFOBJ_TYPE_LIST):
             stack_print((tfstack *) &o->list);
+        }
     }
     printf(" ]");
 }
@@ -172,14 +177,19 @@ void objremove(tfobj *o) {
 }
 
 void tfprint(tfobj *o) {
-    if(o->type == TFOBJ_TYPE_NUM)
+    switch(o->type) {
+    case(TFOBJ_TYPE_NUM):
         printf (" %d", o->num);
-    else if (o->type == TFOBJ_TYPE_OP)
+        break;
+    case(TFOBJ_TYPE_OP):
         printf (" %c", o->op);
-    else if (o->type == TFOBJ_TYPE_STR)
+        break;
+    case(TFOBJ_TYPE_STR):
         printf (" %s", o->str.symbol);
-    else
+        break;
+    case(TFOBJ_TYPE_LIST):
         stack_print((tfstack *) &o->list);
+    }
 }
 
 /* =============================================== Memory rappers ====================================================== */
@@ -195,24 +205,29 @@ void *xmalloc(size_t size) {
 
 /* ==================================================== Getop() =========================================================== */
 
-void getop(FILE *input, tfstack *stack) {}
+void getop(FILE *input, tfstack *stack) {
+    char c;
+    while((c = getc(input)) != ' ') ;
+}
 
 /* ==================================================== MAIN =========================================================== */
 
 int main(int argc, char **argv) {
+    tfstack *stack = stack_create();
+
     if (argc == 1 || argc > 3) {
         fprintf(stderr, "Correct usage: toyforth <cli/open>\n");
     }
     else if (!strcmp(argv[1], "open") ) {
         FILE *readfrom = fopen(argv[2], "r");
         if (readfrom != NULL) {
-            // get_element(readfrom);
+            getop(readfrom, stack);
         } else {
             fprintf(stderr, "File <%s> cannot be opened\n", argv[2]);
         }
     }
     else if (!strcmp(argv[1], "cli")) {
-        //get_element(stdin);
+        getop(stdin, stack);
     } else {
         fprintf(stderr, "Correct usage: toyforth <cli/open>");
     }
