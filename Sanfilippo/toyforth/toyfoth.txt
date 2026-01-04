@@ -1,0 +1,12 @@
+toyforth examples:
+1) 1 1 +
+2) 1 dup +
+3) 10 [10 20 <] if
+
+to-do:
+- sistema per decidere se prendere le struzioni da un file o dalla cli
+- sistema per leggere le istruzioni (getop)
+- sistema per eseguire i calcoli derivanti dalle istruzioni
+
+fatto:
+- scrivere la funzione objfree
